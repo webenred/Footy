@@ -10,9 +10,11 @@ class ServiceController extends Controller
 {
     public function index() 
     {   
-        $services = Service::all();
+
+
+        $services = Service::first();
        
-        return $services;
+        return $services->pricing->extra_formula;
     }
 
     public function store(Request $request)
