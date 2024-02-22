@@ -4,6 +4,7 @@
         add service
     </h1>
     <div class="p-5 bg-slate-300">
+        
         <form action="{{ route('store') }}" method="POST" class="flex flex-col ">
             @csrf
             <label for="slug">slug</label>

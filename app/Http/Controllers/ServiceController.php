@@ -20,11 +20,35 @@ class ServiceController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $service = Service::where('id', $id)->get();
+
+        return view('service.show', [
+            'services' => $service
+        ]);
+    }
+
     public function create()
     {
         return view('service.create', [
             'categories' => Category::all(),
             'types' => Type::all()
+        ]);
+    }
+
+    public function edit($id)
+    {   
+        $service = Service::where('id', $id)->get();
+        $category = Category::all();
+        $type = Type::all();
+        $pricing = Pricing::all();
+
+        return view('service.edit', [
+            'services' => $service,
+            'categories' => $category,
+            'types' => $type,
+            'pricings' => $pricing
         ]);
     }
 
@@ -59,6 +83,8 @@ class ServiceController extends Controller
 
     public function update(Request $request, $id)
     {
+        $service = service::findOrFail($id);
+        
         $request->validate([
             'slug' => 'required',
             'name' => 'required',
@@ -68,18 +94,18 @@ class ServiceController extends Controller
             'pricing_id' => 'required',
         ]);
         
-        $service = service::find($id);
         $service->update($request->all());
 
-        return redirect()->rout('index')->with('success, up');
+        return redirect()->route('index')->with('success, updated');
     }
 
     public function destroy($id)
     {
-        $service = service::find($id);
+        $service = service::findOrFail($id);
         $service->delete();
+        
 
-        return redirect()->route('index')->with('success, Supprimer avec succes');
+        return redirect()->route('index')->with('success', 'Deleted');
 
     }
 

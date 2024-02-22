@@ -25,13 +25,15 @@ Route::get('/', [ServiceController::class, 'index'])->name('index');
 
 Route::post('/store', [ServiceController::class, 'store'])->name('store');
 
-Route::get('/show', [ServiceController::class, 'show'])->name('show');
+Route::get('/show-{id}', [ServiceController::class, 'show'])->name('show');
 
-Route::get('/update', [ServiceController::class, 'update'])->name('update');
+Route::get('/show-{id}/edit', [ServiceController::class, 'edit'])->name('edit');
+
+Route::post('/update', [ServiceController::class, 'update'])->name('update');
 
 Route::get('/create', [ServiceController::class, 'create'])->name('create');
 
-Route::get('/destroy', [ServiceController::class, 'destroy'])->name('destroy');
+Route::get('/destroy/{id}', [ServiceController::class, 'destroy'])->name('destroy');
 
 
 
